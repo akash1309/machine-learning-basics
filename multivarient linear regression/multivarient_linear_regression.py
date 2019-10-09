@@ -40,7 +40,10 @@ features = 6
 theta = [5,5,5,5,5,5]  #6 elements as there are 6 features
 learning_rate = 0.01
 alpha = learning_rate
-iterations = 100000
+iterations = 10000
+cost = np.zeros(iterations)
+
+
 
 def h(i):
     return theta[0] * X[i][0] + theta[1] * X[i][1] + theta[2] * X[i][2] + theta[3] * X[i][3]
@@ -71,13 +74,16 @@ def gradient_descent():
     for i in range(iterations):
         temp = update_parameters()
         theta = temp
+        cost[i] = cost_function()
 
-def graph_plotting(y_p):
-    plt.scatter(X, y, color = 'red')
-    plt.plot(X, y_p , color = 'blue')
-    plt.xlabel('Features')
-    plt.ylabel('Output')
-    plt.title('Multivarient_linear_regression')
+def graph_plotting():
+    #plot the cost
+    global cost, iterations
+    fig, ax = plt.subplots()
+    ax.plot(np.arange(iterations), cost, 'r')
+    ax.set_xlabel('Iterations')
+    ax.set_ylabel('Cost')
+    ax.set_title('Error vs. Training Epoch')
     plt.show()
 
 def main():
@@ -88,12 +94,14 @@ def main():
         y_pred.append(h(i))
 
     """we cannot plot graph for Multivarient_linear_regression as there are many features.
-       what we can do is to plot graph for every feature and then compare the values"""
+       what we can do is to plot graph for every feature and then compare the values
+       Here, I am plotting graph between cost and no. of iterations."""
 
-    #graph_plotting(y_p)
+    graph_plotting()
     #checking the real output and predicted output
     print("original output   vs     predicted output\n")
     for i in range(m):
         print(str(y[i][0]) + " " + str(y_pred[i]) + "\n")
+
 
 main()
