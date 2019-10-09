@@ -40,7 +40,7 @@ features = 6
 theta = [5,5,5,5,5,5]  #6 elements as there are 6 features
 learning_rate = 0.01
 alpha = learning_rate
-iterations = 10000
+iterations = 1000
 cost = np.zeros(iterations)
 
 
@@ -87,7 +87,7 @@ def graph_plotting():
     plt.show()
 
 def main():
-    global X,y
+    global X,y,sc_X,sc_y
     gradient_descent()
     y_pred = []
     for i in range(m):
@@ -98,6 +98,9 @@ def main():
        Here, I am plotting graph between cost and no. of iterations."""
 
     graph_plotting()
+    X = sc_X.inverse_transform(X)
+    y = sc_y.inverse_transform(y)
+    y_pred = sc_y.inverse_transform(y_pred)
     #checking the real output and predicted output
     print("original output   vs     predicted output\n")
     for i in range(m):
