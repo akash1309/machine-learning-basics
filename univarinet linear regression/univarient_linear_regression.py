@@ -71,7 +71,7 @@ def graph_plotting():
     plt.plot(x, y_pred , color = 'blue')
     plt.xlabel('x')
     plt.ylabel('y')
-    plt.title('linear_regression')
+    plt.title('univarient_linear_regression')
     plt.show()
 
 
